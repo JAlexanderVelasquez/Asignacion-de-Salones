@@ -1,0 +1,20 @@
+{
+    "builtinSolverConfigs": [
+    ],
+    "openFiles": [
+        "Horario.mzn",
+        "Data0.dzn",
+        "Data1.dzn"
+    ],
+    "openTab": 2,
+    "projectFiles": [
+        "Data0.dzn",
+        "Data1.dzn",
+        "Horario.mzn"
+    ],
+    "projectSolverConfigs": [
+    ],
+    "selectedBuiltinConfigId": "org.minizinc.mip.coin-bc",
+    "selectedBuiltinConfigVersion": "2.10/1.17",
+    "version": 105
+}

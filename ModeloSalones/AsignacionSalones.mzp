@@ -1,0 +1,34 @@
+{
+    "builtinSolverConfigs": [
+    ],
+    "openFiles": [
+        "Salones.mzn",
+        "SalonesCount.mzn",
+        "SalonesGC.mzn",
+        "Data1.dzn",
+        "data0.dzn",
+        "d0.dzn",
+        "Data2.dzn",
+        "data3.dzn",
+        "Data4.dzn",
+        "Data5.dzn"
+    ],
+    "openTab": 8,
+    "projectFiles": [
+        "Data1.dzn",
+        "Data2.dzn",
+        "Data4.dzn",
+        "Data5.dzn",
+        "Salones.mzn",
+        "SalonesCount.mzn",
+        "SalonesGC.mzn",
+        "d0.dzn",
+        "data0.dzn",
+        "data3.dzn"
+    ],
+    "projectSolverConfigs": [
+    ],
+    "selectedBuiltinConfigId": "org.gecode.gecode",
+    "selectedBuiltinConfigVersion": "6.1.1",
+    "version": 105
+}
