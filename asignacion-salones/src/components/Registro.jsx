@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { auth } from '../firebaseconfig'
+import { auth, firedb } from '../firebaseconfig'
 import {useHistory} from 'react-router-dom'
 const Registro = () => {
 
@@ -32,6 +32,21 @@ const Registro = () => {
         auth.createUserWithEmailAndPassword(email, password)
         .then( async ({user}) => {
             await user.updateProfile({displayName: name})
+    
+            const newUser = {
+                id:user.uid,
+                name: name,
+                email: email,
+                password: password,
+                active: true,
+            }
+            try {
+                const data = await firedb.collection('Usuario').add(newUser)
+                console.log("Data stored: ", data)
+            } catch (error) {
+                console.log("Store error: ",error)
+            }
+
             alert(`Usuario ${name} Registrado`)
             historial.push({ pathname:'/' , state: { name: name}})
          })

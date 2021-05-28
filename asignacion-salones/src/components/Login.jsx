@@ -32,6 +32,10 @@ const Login = () => {
             if(error.code === 'auth/wrong-password'){
                 setMsgError('Contraseña incorrecta')
             }
+            if(error.code === 'auth/user-not-found'){
+                setMsgError('Usuario no registrado')
+            }
+            
         })
     }
     return (
@@ -57,7 +61,7 @@ const Login = () => {
                 {
                     msgError != null ?
                     (
-                        <div className="alert alert-danger">{msgError}</div>
+                        <div className="alert alert-danger mt-4">{msgError}</div>
                     )
                     :
                     (

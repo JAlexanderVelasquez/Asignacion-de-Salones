@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { auth } from '../firebaseconfig'
-import {useHistory, useLocation} from 'react-router-dom'
+import { useLocation} from 'react-router-dom'
 const Perfil = () => {
 
     const user = auth.currentUser;
 
     const location = useLocation();
 
-    const historial = useHistory()
     const [name, setName] = useState(location.state?.name);
     const [email, setEmail] = useState(location.state?.email);
     const [password, setPassword] = useState();
@@ -54,6 +53,7 @@ const Perfil = () => {
         setMsgError(null)
     
         window.location.reload(false);
+        alert("Actualizacion exitosa")
     }
 
     return (

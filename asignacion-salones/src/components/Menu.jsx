@@ -1,16 +1,17 @@
 import React, {useEffect,useState} from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import {auth} from '../firebaseconfig'
-import { ArrowReturnRight, CardHeading, HouseDoorFill, QuestionCircle, PersonFill } from 'react-bootstrap-icons';
+import { ArrowReturnRight, CardHeading, HouseDoorFill, QuestionCircle, PersonFill, Upload, CardText } from 'react-bootstrap-icons';
 
 const Menu = () => {
     const historial = useHistory()
-    const [usuario,setUsuario] = useState(null);
+    const [usuario,setUsuario] = useState('');
 
     useEffect(() => {
         console.log("MENUS USEEFFECT")
         auth.onAuthStateChanged( (user) => {
             if(user){
+                console.log(user)
                 setUsuario(user)
             }
         })
@@ -18,12 +19,12 @@ const Menu = () => {
 
     const CerrarSesion = () => {
         auth.signOut()
-        setUsuario(null)
+        setUsuario('')
         historial.push('/')
     }
     return (
         <div>
-            <nav className="navbar navbar-expand-xl navbar-dark bg-dark justify-content-between h4">
+            <nav className="navbar navbar-expand-xl navbar-dark bg-dark justify-content-between h5">
                 <ul className="navbar-nav ">
                     <li className="nav-item ">
                         <Link className="nav-link" to={{ pathname:'/' , state: { name: usuario?.displayName}}}> <HouseDoorFill className="mx-3" color="white" size={24} /> Inicio</Link>
@@ -57,6 +58,30 @@ const Menu = () => {
                             usuario ?
                             (
                                 <Link className="nav-link" to={{ pathname:'/perfil' , state: { name: usuario?.displayName, email: usuario?.email, password: usuario?.password}}}><PersonFill className="mx-3" color="white" size={24}/>Perfil</Link>
+                            )
+                            :
+                            (
+                                <span></span>
+                            )
+                        }
+                    </li>
+                    <li className="nav-item ">
+                        {
+                            usuario ?
+                            (
+                                <Link className="nav-link" to='/cargarArchivos'><Upload className="mx-3" color="white" size={24}/>Asignar</Link>
+                            )
+                            :
+                            (
+                                <span></span>
+                            )
+                        }
+                    </li>
+                    <li className="nav-item ">
+                        {
+                            (usuario.displayName === "Administrador" || usuario.email === "admin@admin.com") ?
+                            (
+                                <Link className="nav-link" to='/users'><CardText className="mx-3" color="white" size={24}/>Administrar</Link>
                             )
                             :
                             (
