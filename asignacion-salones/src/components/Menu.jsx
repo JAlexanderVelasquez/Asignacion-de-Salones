@@ -8,10 +8,8 @@ const Menu = () => {
     const [usuario,setUsuario] = useState('');
 
     useEffect(() => {
-        console.log("MENUS USEEFFECT")
         auth.onAuthStateChanged( (user) => {
             if(user){
-                console.log(user)
                 setUsuario(user)
             }
         })

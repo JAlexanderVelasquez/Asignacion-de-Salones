@@ -12,25 +12,26 @@ const AdministrarUsuarios = () => {
     useEffect(() => {
         const getUsuarios = async () => {
             const { docs } = await firedb.collection('Usuario').get()
-            console.log("DOSC",docs);
-            const nuevaLista = docs?.map( item => {console.log(item.id)
-                return {id: item.id, ...item.data()}})
+            const nuevaLista = docs?.map( item => ({id: item.id, ...item.data()}))
             console.log(nuevaLista)
             setListaUsuario(nuevaLista)
         }
         getUsuarios();
-    }, [])
+    }, [listaUsuario]);
 
     const setUsuarios = async (e) => {
         e.preventDefault();
         if(!name.trim()){
             setMsgError("El campo nombre esta vacio")
+            return
         }
         else if(!email.trim()){
             setMsgError("El campo email esta vacio")
+            return
         }
         else if(!password.trim()){
             setMsgError("El campo password  esta vacio")
+            return
         }
 
         const newUser = {
@@ -41,11 +42,36 @@ const AdministrarUsuarios = () => {
         }
         console.log("USER TO STORE,",newUser)
         try {
-            const data = await firedb.collection('usuario').add(newUser)
-            console.log("Data stored: ", data)
+            //const data = await firedb.collection('usuario').add(newUser)
+            console.log("Data stored: ", "data")
         } catch (error) {
             console.log("Store error: ",error)
         }
+    }
+
+    const inhabilitarUsuario = async(id) => {
+        const usuarioMod = await firedb.collection("Usuario").doc(id);
+        return usuarioMod.update({
+            active: false,
+        })
+        .then(() => {
+            alert("Usuario inhabilitado correctamente")
+        })
+        .catch((error) => {
+            console.error("Error updating document: ", error);
+        });
+    }
+    const habilitarUsuario = async(id) => {
+        const usuarioMod = await firedb.collection("Usuario").doc(id);
+        return usuarioMod.update({
+            active: true,
+        })
+        .then(() => {
+            alert("Usuario inhabilitado correctamente")
+        })
+        .catch((error) => {
+            console.error("Error updating document: ", error);
+        });
     }
 
     const ActualizarUsuario = (e) => {
@@ -114,7 +140,7 @@ const AdministrarUsuarios = () => {
     return (
         <div className="container">
             <div className="row mt-5">
-                <div className="col">
+                <div className="col-4">
                     <h2 className="text-center">Administrar Usuarios</h2>
                     <form
                         onSubmit={setUsuarios}
@@ -162,15 +188,25 @@ const AdministrarUsuarios = () => {
                         <span></span>
                     )}
                 </div>
-                <div className="col">
-                    <h2 className="text-center">Lista de Usuarios</h2>
-                    <ul>
+                <div className="col-1"></div>
+                <div className="col-7">
+                    <h2 className="text-center mb-5">Lista de Usuarios</h2>
+                    <ul className="list-group">
                         {
                             listaUsuario?.length !== 0 
                             ? 
                             (
                                 listaUsuario?.map(item => (
-                                    <li key={item.id}>{item.name} - {item.email}</li>
+                                    <li className="list-group-item d-flex justify-content-between row" key={item.id}> 
+                                    <p className={item.active? "col-8 text-justify":"col-8 text-justify text-secondary"} >{item.name} - {item.email} </p>
+                                    <button  className="btn btn-secondary col mx-2">Editar</button>
+                                    {
+                                        item.active ?
+                                        <button onClick={(id) => {inhabilitarUsuario(item.id)}} className="btn btn-danger col mx-2">Deshabilitar</button> 
+                                        :
+                                        <button onClick={(id) => {habilitarUsuario(item.id)}} className="btn btn-success col mx-3 ">Habilitar</button>
+                                    }
+                                    </li>
                                 ))
                             ) 
                             :

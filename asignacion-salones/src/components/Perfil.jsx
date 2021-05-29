@@ -23,7 +23,6 @@ const Perfil = () => {
                 alert("Nombre actualizado correctamente");
             }).catch((error) => {
                 alert("Error al actualizar el nombre")
-                console.log("nombreError",error)
             });
         }
         if(email !== location.state?.email){
@@ -31,7 +30,6 @@ const Perfil = () => {
                 alert("Email actualizado correctamente");
               }).catch((error) => {
                 alert("Error al actualizar el email")
-                console.log("emailError",error)
               });
         }
         if(password !== location.state?.password){
@@ -47,7 +45,6 @@ const Perfil = () => {
                 alert("Contraseña actualizada correctamente");
               }).catch((error) => {
                 alert("Error al actualizar la contraseña")
-                console.log("contraseñaError",error)
               });
         }
         setMsgError(null)

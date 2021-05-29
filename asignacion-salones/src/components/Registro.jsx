@@ -18,7 +18,6 @@ const Registro = () => {
         }
         if(!email.trim()){
             alert('Debe ingresar un email')
-            console.log("EMAIL",email)
             return
         }
         if(!password.trim()){
@@ -34,7 +33,7 @@ const Registro = () => {
             await user.updateProfile({displayName: name})
     
             const newUser = {
-                id:user.uid,
+                authId:user.uid,
                 name: name,
                 email: email,
                 password: password,
@@ -42,7 +41,6 @@ const Registro = () => {
             }
             try {
                 const data = await firedb.collection('Usuario').add(newUser)
-                console.log("Data stored: ", data)
             } catch (error) {
                 console.log("Store error: ",error)
             }
