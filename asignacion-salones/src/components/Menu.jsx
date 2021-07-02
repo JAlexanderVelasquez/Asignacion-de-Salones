@@ -89,7 +89,7 @@ const Menu = () => {
                     </li>
                     <li className="nav-item ">
                         {
-                            usuario ?
+                            (usuario.displayName !== "Administrador" || usuario.email !== "admin@admin.com") ?
                             (
                                 <Link className="nav-link" to='/ayuda'><QuestionCircle className="mx-3" color="white" size={24}/>Ayuda</Link>
                             )

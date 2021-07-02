@@ -71,7 +71,7 @@ const AdministrarUsuarios = () => {
             active: true,
         })
         .then(() => {
-            alert("Usuario inhabilitado correctamente")
+            alert("Usuario habilitado correctamente")
             getUsuarios();
         })
         .catch((error) => {

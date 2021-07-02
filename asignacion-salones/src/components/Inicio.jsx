@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 const Inicio = () => {
     const location = useLocation();
+    console.log(location)
     return (
         <div className="container">
             <h1 className="text-center m-5 display-2">
