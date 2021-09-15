@@ -15,13 +15,19 @@ const Perfil = () => {
 
     const ActualizarUsuario = (e) => {
         //e.preventDefault()
-
+        console.log("actualizar usuario")
+        console.log("name",name)
+        console.log("locname",location.state?.name)
         if(name !== location.state?.name){
+            console.log("actualizar nombre")
+
             user.updateProfile({
             displayName: name,
             }).then(() => {
+                console.log("then")
                 alert("Nombre actualizado correctamente");
             }).catch((error) => {
+                console.log("cat",error)
                 alert("Error al actualizar el nombre")
             });
         }

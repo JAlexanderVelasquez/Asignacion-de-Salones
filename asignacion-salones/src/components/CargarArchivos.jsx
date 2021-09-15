@@ -7,7 +7,8 @@ const CargarArchivos = () => {
     const [progreso, setProgreso] = useState(0)
     const [archivoD, setArchivoD] = useState("")
     const [archivoA, setArchivoA] = useState("")
-
+//    const [asignacion, setAsignacion] = useState('<h1 style="color:red;">Aun no ha realizado una asignacion</h1>')
+    const base_Url = 'http://localhost:5000/api';
     useEffect(() => {
         setDate(new Date().toLocaleDateString().replaceAll("/","-"));
         console.log(date);
@@ -54,6 +55,24 @@ const CargarArchivos = () => {
                 alert(`Archivo ${archivoA.name} subido con exito`)
             }
         )
+        const formData = new FormData();
+		formData.append('csvProg', archivoA);
+		formData.append('csvDispo', archivoD);
+        fetch(base_Url, {method : "POST", body : formData}).then((response) => {
+            console.log(response)
+            return response.text()
+        }).then((data) => {
+            console.log("data",data)
+
+        })
+    }
+    const probarApi = () => {
+        fetch(base_Url).then((response) => {
+            console.log(response)
+            return response.json()
+        }).then((data) => {
+            console.log(data)
+        })
     }
     return (
         <div className="container">
@@ -65,6 +84,7 @@ const CargarArchivos = () => {
                 <p className=" my-4">Seleccion la programacion academica</p>
                 <input className="form-control my-4" onChange={(e) => { setArchivoA(e.target.files[0]) }} type="file" accept=".csv" />
                 <button className="btn btn-block btn-primary mt-4" onClick={(e) => {e.preventDefault(); subirArchivos();  }}>Enviar Archivos</button>
+                <button className="btn btn-block btn-primary mt-4" onClick={(e) => {e.preventDefault(); probarApi();  }}>Probar API Archivos</button>
             </form>
         </div>
     )
