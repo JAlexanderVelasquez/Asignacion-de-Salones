@@ -11,7 +11,6 @@ const CargarArchivos = () => {
     const base_Url = 'http://localhost:5000/api';
     useEffect(() => {
         setDate(new Date().toLocaleDateString().replaceAll("/","-"));
-        console.log(date);
     }, [])
     //const dat = new Date().toISOString();
 
@@ -30,13 +29,10 @@ const CargarArchivos = () => {
         task.on('state_changed',
             (snapshot) => {
                 setProgreso((snapshot.bytesTransferred / snapshot.totalBytes)*100);
-                console.log(progreso)
             },
             function error(err) {
-                console.log(err);
             },
             function complete() {   
-                console.log("FINALIZADO DDD")
                 alert(`Archivo ${archivoD.name} subido con exito`)
             }
         )
@@ -48,10 +44,8 @@ const CargarArchivos = () => {
                 setProgreso((snapshot.bytesTransferred / snapshot.totalBytes)*100);
             },
             function error(err) {
-                console.log(err);
             },
             function complete() {
-                console.log("FINALIZADO AAA")
                 alert(`Archivo ${archivoA.name} subido con exito`)
             }
         )
@@ -59,19 +53,9 @@ const CargarArchivos = () => {
 		formData.append('csvProg', archivoA);
 		formData.append('csvDispo', archivoD);
         fetch(base_Url, {method : "POST", body : formData}).then((response) => {
-            console.log(response)
             return response.text()
         }).then((data) => {
-            console.log("data",data)
 
-        })
-    }
-    const probarApi = () => {
-        fetch(base_Url).then((response) => {
-            console.log(response)
-            return response.json()
-        }).then((data) => {
-            console.log(data)
         })
     }
     return (
