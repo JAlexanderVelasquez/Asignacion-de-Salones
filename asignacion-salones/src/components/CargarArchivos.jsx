@@ -55,7 +55,6 @@ const CargarArchivos = () => {
         fetch(base_Url, {method : "POST", body : formData}).then((response) => {
             return response.text()
         }).then((data) => {
-
         })
     }
     return (
