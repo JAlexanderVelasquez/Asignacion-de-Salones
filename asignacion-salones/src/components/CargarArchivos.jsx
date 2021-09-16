@@ -67,7 +67,6 @@ const CargarArchivos = () => {
                 <p className=" my-4">Seleccion la programacion academica</p>
                 <input className="form-control my-4" onChange={(e) => { setArchivoA(e.target.files[0]) }} type="file" accept=".csv" />
                 <button className="btn btn-block btn-primary mt-4" onClick={(e) => {e.preventDefault(); subirArchivos();  }}>Enviar Archivos</button>
-                <button className="btn btn-block btn-primary mt-4" onClick={(e) => {e.preventDefault(); probarApi();  }}>Probar API Archivos</button>
             </form>
         </div>
     )
