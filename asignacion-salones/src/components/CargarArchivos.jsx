@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { store } from '../firebaseconfig'
+import { useLocation} from 'react-router-dom'
+
 
 const CargarArchivos = () => {
 
+    const location = useLocation();
+    const [email, setEmail] = useState(location.state?.email);
     const [date, setDate] = useState(new Date().toLocaleDateString())
     const [progreso, setProgreso] = useState(0)
     const [archivoD, setArchivoD] = useState("")
@@ -49,7 +53,11 @@ const CargarArchivos = () => {
                 alert(`Archivo ${archivoA.name} subido con exito`)
             }
         )
+        if(email == null || email == undefined) {
+            setEmail("asignacionsalones@gmail.com");
+        } 
         const formData = new FormData();
+		formData.append('userEmail', email);
 		formData.append('csvProg', archivoA);
 		formData.append('csvDispo', archivoD);
         fetch(base_Url, {method : "POST", body : formData}).then((response) => {

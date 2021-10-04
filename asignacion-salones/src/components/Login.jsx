@@ -18,7 +18,6 @@ const Login = () => {
             alert('Debe ingresar una contraseña')
             return
         }
-        console.log(email)
         await firedb.collection('Usuario').where("email", "==", email)//.where("password", "==", password)//opcional
             .get()
             .then((querySnapshot) => {
@@ -27,13 +26,9 @@ const Login = () => {
                 }
                 querySnapshot.forEach((doc) => {
                     if(doc.data().active){
-                        //console.log("PUEDE INGRESAR")
                         auth.signInWithEmailAndPassword(email, password)
                         .then(async r => {
-                            //console.log("USUARIO LOGEADO CORRECTAMENTE")
-                            historial.push({ pathname:'/' , state: { name: r.user.displayName}})
-                            //historial.push({pathname:'/', state: { nombre: r.user.displayName}})
-                            //historial.push('/')
+                            historial.push({ pathname:'/ayuda' , state: { name: r.user.displayName}})
                         })
                         .catch(error => {
                             if (error.code === 'auth/invalid-email') {
@@ -48,19 +43,12 @@ const Login = () => {
                         })
                     }else{
                         alert("Este usuaio esta bloqueado")
-                        //console.log("USUARIO BLOQUEADO")
                     }
                 });
             })
             .catch((error) => {
                 console.log("Error getting documents: ", error);
             });
-        
-        //            const allUsers = docs?.map( item =>  ({...item.data()}) )
-        // const allUsers = docs?.map( ({ emailU, active }) =>  { if(emailU === email) return active} )
-        //const { active } = allUsers?.filter( (item) =>  item.email === email )
-        //            console.log("ESTADO DEL USUARIO",da)
-        //console.log("ESTADO DEL USUARIO",active)
 
     }
     return (

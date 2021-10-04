@@ -18,7 +18,6 @@ const AdministrarUsuarios = () => {
     const getUsuarios = async () => {
         const { docs } = await firedb.collection('Usuario').get()
         const nuevaLista = docs?.map( item => ({id: item.id, ...item.data()}))
-        console.log(nuevaLista)
         setListaUsuario(nuevaLista)
     }
 

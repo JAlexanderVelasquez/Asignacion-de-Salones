@@ -67,7 +67,7 @@ const Menu = () => {
                         {
                             usuario ?
                             (
-                                <Link className="nav-link" to='/cargarArchivos'><Upload className="mx-3" color="white" size={24}/>Asignar</Link>
+                                <Link className="nav-link" to={{ pathname:'/cargarArchivos' , state: {email: usuario?.email}}}><Upload className="mx-3" color="white" size={24}/>Asignar</Link>
                             )
                             :
                             (
